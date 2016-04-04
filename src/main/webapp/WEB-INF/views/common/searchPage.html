@@ -1,0 +1,45 @@
+
+<div class="am-container" >
+    <ul data-am-widget="pagination" class="am-pagination am-pagination-default " style="text-align:center;">
+ 
+        <% if(pageInfo.hasPreviousPage) { %>
+          <li class="am-pagination-first ">
+            <a href="?pageNumber=1<% for(par in parameter) { if(parLP.odd){ %>&${par}=<% } if(parLP.even){ %>${par}<% } }%>">
+            第一页</a>
+          </li>
+        <% } %>
+    
+        <li class="am-pagination-prev ">
+        <% if(!pageInfo.hasPreviousPage) { %>
+            <a class="am-btn am-btn-default am-disabled">上一页</a>
+        <% } else { %>
+            <a href="?pageNumber=${pageInfo.prePage}<% for(par in parameter) { if(parLP.odd){ %>&${par}=<% } if(parLP.even){ %>${par}<% } }%>">上一页</a>
+        <% } %>
+        </li>
+  
+        <% for(i in pageInfo.navigatepageNums){ %>
+
+          <% if(i==pageInfo.pageNum) { %>
+              <li class="am-active" ><a style="z-index:0">${i}</a></li>
+            <% } else { %>
+              <li><a href="?pageNumber=${i}<% for(par in parameter) { if(parLP.odd){ %>&${par}=<% } if(parLP.even){ %>${par}<% } }%>">${i}</a></li>
+          <% } %>
+
+        <% } %>
+  
+        <li class="am-pagination-next ">
+        <% if(!pageInfo.hasNextPage) { %>
+            <a class="am-btn am-btn-default am-disabled">下一页</a>
+        <% } else { %>
+            <a href="?pageNumber=${pageInfo.nextPage}<% for(par in parameter) { if(parLP.odd){ %>&${par}=<% } if(parLP.even){ %>${par}<% } }%>">下一页</a>
+        <% } %>
+        </li>
+
+        <% if(pageInfo.hasNextPage) { %>
+           <li class="am-pagination-last ">
+                <a href="?pageNumber=${pageInfo.pages}<% for(par in parameter) { if(parLP.odd){ %>&${par}=<% } if(parLP.even){ %>${par}<% } }%>">最末页</a>
+           </li>
+        <% } %>
+
+    </ul>
+</div>

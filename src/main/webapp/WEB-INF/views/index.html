@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>管理系统</title>
+<link rel="icon" type="image/png" href="${ctxPath}/static/i/favicon.png">
+<!-- maze UI 所有样式文件 -->
+<link rel="stylesheet" href="${ctxPath}/static/css/amazeui.min.css">
+<!--  自定义样式文件 -->
+<link rel="stylesheet" href="${ctxPath}/static/css/app.css">
+</head>
+<body>
+    <!-- header start -->
+    <header class="am-topbar admin-header">
+        <div class="am-topbar-brand">
+            <img src="${ctxPath}/static/i/logo.png" class="am-img-thumbnail am-circle" style="max-width:100%; max-height:90%" ><strong>&nbsp;&nbsp;管理系统</strong>
+        </div>
+
+        <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            
+              <li class="am-dropdown" data-am-dropdown>
+                <a target="myframe" class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                  <span class="am-icon-user"></span> ${admin.username} <span class="am-icon-caret-down"></span>
+                </a>
+                <ul class="am-dropdown-content">
+                  <li><a target="myframe" href="${ctxPath}/user/info?id=${admin.id}"><span class="am-icon-user"></span> 修改资料</a></li>
+                  <li><a target="myframe" href="${ctxPath}/user/password"><span class="am-icon-cog"></span> 修改密码</a></li>
+                </ul>
+              </li>
+  
+                <li><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span
+                        class="admin-fullText">开启全屏</span></a></li>
+                <li><a href="user/logout"><span class="am-icon-sign-out"></span> 退出</a></li>
+            </ul>
+        </div>
+
+    </header>
+    <!-- header end -->
+    
+    <div class="am-cf admin-main">
+        <!-- 左侧菜单栏 start -->
+        <div class="admin-sidebar">
+            <!-- 首页menu start -->
+            <div class="simple-title am-vertical-align" style="border-top: none;">
+                <a href="home" class="am-btn-block am-vertical-align-middle" target="myframe"><span
+                    class="am-icon-home "></span> 首页</a>
+            </div>
+            <!-- 首页menu end -->
+
+            <!-- 下拉列表标题写在此容器 start -->
+            <section data-am-widget="accordion" class="am-accordion section-all" data-am-accordion='{  }'>
+
+                <!-- 用户menu start -->
+                <dl class="am-accordion-item">
+                    <dt class="am-accordion-title">
+                        <span class="am-icon-users "></span>用户管理<i class="am-icon-angle-right am-fr am-margin-right"></i>
+                    </dt>
+                    <dd class="am-accordion-bd am-collapse ">
+                       <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+                        <ul class="am-list am-in admin-sidebar-sub">
+                            <li><a href="userLoginLog/list" target="myframe"><span class="am-icon-table"></span>用户登录日志列表</a></li>
+                            <li><a href="userUseLog/list" target="myframe"><span class="am-icon-table"></span>用户使用日志列表</a></li>
+                            <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span>
+                                    个人资料</a></li>
+                            <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 帮助页</a></li>
+                            <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面</a></li>
+                            <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
+                            <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
+                        </ul>
+                    </dd>
+                </dl>
+                <!-- 用户menu end -->
+                
+            </section>
+        <!-- 下拉列表标题写在此容器 end -->
+        </div>
+
+        <!-- 左侧菜单栏 end -->
+
+        <!-- iframe显示框 start -->
+        <div class="admin-content">
+            <iframe id="my-iframe" src="home" name="myframe" frameborder="0" style="height: auto;"></iframe>
+        </div>
+        <!-- iframe显示框 end -->
+
+    </div>
+
+    <!-- bottom start -->
+    <footer class="footer">
+        <p class="am-padding-left">&copy; 2014 All rights reserved.</p>
+    </footer>
+    <!-- bottom end -->
+
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="${ctxPath}/static/js/jquery.min.js"></script>
+    <script src="${ctxPath}/static/js/amazeui.min.js"></script>
+    <!--<![endif]-->
+    <script src="${ctxPath}/static/js/app.js"></script>
+    <!-- 设置iframe高度自由适应窗口整体高度 -->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".admin-main").css("min-height", $(window).height() * 0.85);
+        
+            //初始化iframe高度 
+            $("#my-iframe").css("min-height", $(".admin-main").height());
+        
+            /* 设置iframe高度自适应 里面内容的高度  */
+            $("#my-iframe").load(function() {
+                var mainheight = $(this).contents().find("#all_content").height() + 30;
+                $(this).height(mainheight);
+            });
+
+      	});
+   </script>
+</body>
+</html>

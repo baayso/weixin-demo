@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="content-type" content="no-cache, must-revalidate" />
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT" />
+
+<!-- 载入 AmazeUI所有样式文件 -->
+<link rel="stylesheet" href="${ctxPath}/static/css/amazeui.min.css">
+<!--  载入自定义样式文件 -->
+<link rel="stylesheet" href="${ctxPath}/static/css/app.css">
+<!-- 载入 jqueryUI 样式-->
+<link type="text/css" href="${ctxPath}/static/css/jquery-ui.css" rel="stylesheet" />
+<!-- 载入zTree样式 -->
+<link rel="stylesheet" href="${ctxPath}/static/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+<!-- 载入jquery库 -->
+<script src="${ctxPath}/static/js/jquery.min.js"></script>
+<!-- 载入 layer核心库 -->
+<!-- <script src="${ctxPath}/static/layer/layer.min.js"></script> -->
+<!-- 载入 layer扩展库 -->
+<!-- <script src="${ctxPath}/static/layer/extend/layer.ext.js"></script> -->
+<!-- <script src="${ctxPath}/static/js/qiniu/jquery-1.9.1.min.js"></script>  -->
+<!-- 载入 jqueryUI -->
+<script type="text/javascript" src="${ctxPath}/static/js/jquery-ui.min.js"></script>
+<!-- 载入 timepicker-addon 需在以上js载入后有效 -->
+<script type="text/javascript" src="${ctxPath}/static/js/jquery-ui-timepicker-addon.js"></script>
+<!-- 载入表格列排序js -->
+<script type="text/javascript" src="${ctxPath}/static/js/jquery.tablesorter.js"></script>
+<!-- 载入zTreejs -->
+<script type="text/javascript" src="${ctxPath}/static/js/jquery.ztree.all-3.5.min.js"></script>
+<!-- 载入validate的js -->
+<script type="text/javascript" src="${ctxPath}/static/js/jquery.validate.min.js"></script>
+<!-- 载入自定义js函数 -->
+<script type="text/javascript" src="${ctxPath}/static/js/app.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $(".ui_timepicker").datetimepicker({
+            showSecond : true,
+            timeFormat : 'HH:mm:ss',
+            stepHour : 1,
+            stepMinute : 1,
+            stepSecond : 1
+        })
+    });
+
+    var ctxPath = '${ctxPath}';
+
+    /* 七牛云存储 公有空间 推荐域名 */
+    var QINIU_PUBLIC_BUCKET_DOMAIN = 'http://7xiqdo.com1.z0.glb.clouddn.com/';
+</script>
+</head>
+
+<body>
+    <div id="all_content">
+        <!-- 路径导航 start -->
+        <ol class="am-breadcrumb am-breadcrumb-slash">
+            <li>首页</li> <% for(stage in stageArr) { %> <% if(stageLP.last) { %>
+            <li class="am-active">${stage}</li> <% } else { %>
+            <li>${stage}</li> <% } %> <% } %>
+        </ol>
+        <!-- 路径导航 end -->

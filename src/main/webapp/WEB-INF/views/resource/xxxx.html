@@ -1,0 +1,89 @@
+<script>
+    !
+            function(t) {
+                if (t) {
+                    t(function() {
+                        FastClick.attach(document.body)
+                    });
+                    var e = t.AMUI.iScroll;
+                    if (e) {
+                        var i = "localStorage" in window && window.localStorage && window.localStorage,
+                                o = ["accordion", "divider", "duoshuo", "figure", "footer", "gallery", "gotop", "header", "intro", "list_news", "map", "mechat", "menu", "navbar", "pagination", "paragraph", "slider", "tabs", "titlebar", "wechatpay"],
+                                n = function() {
+                                    var n = t("body"),
+                                            a = t(".widget-hd"),
+                                            s = t("#demo-scroller"),
+                                            c = t("#widget-list");
+                                    this.compile = Handlebars.compile(t("#tpl-demo-list").html()),
+                                            this.cache = {},
+                                            this.demoScroll = null,
+                                            this.render = function(t, e) {
+                                                return this.cache[t] || (this.cache[t] = this.compile(e)),
+                                                        this.cache[t]
+                                            },
+                                            this.createList = function(e) {
+                                                e = e || this.getHash();
+                                                var n = this,
+                                                        s = "__amui_widget_" + e + "_demos";
+                                                return e && a.find("h1").text(c.find("[data-rel=" + e + "]").text() + "Demos"),
+                                                        i && i.getItem(s) ? this.setActive(e, JSON.parse(i.getItem(s))) : !e || o.indexOf(e) < 0 ? this.resetActive() : void t.ajax({
+                                                            type: "GET",
+                                                            url: "/widgets/" + e + "?json=1",
+                                                            dataType: "json",
+                                                            success: function(t) {
+                                                                i.setItem(s, JSON.stringify(t)),
+                                                                        n.setActive(e, t)
+                                                            },
+                                                            error: function(t, e) {
+                                                                alert("Ajax error")
+                                                            }
+                                                        })
+                                            },
+                                            this.setActive = function(i, o) {
+                                                s.empty().html(this.render(i, o)),
+                                                        n.addClass("demo-list-active"),
+                                                this.demoScroll || (this.demoScroll = new e("#demo-list", {
+                                                    tap: !0
+                                                })),
+                                                        setTimeout(t.proxy(function() {
+                                                                    this.demoScroll.refresh()
+                                                                },
+                                                                this), 100)
+                                            },
+                                            this.resetActive = function() {
+                                                n.removeClass("demo-list-active")
+                                            },
+                                            this.getHash = function() {
+                                                return window.location.hash.replace("#", "")
+                                            },
+                                            this.init = function() {
+                                                c.on("click tap", "a",
+                                                        function(e) {
+                                                            e.preventDefault(),
+                                                                    window.location.hash = t(this).attr("data-rel")
+                                                        }),
+                                                        t(window).on("hashchange", t.proxy(function() {
+                                                                    this.createList()
+                                                                },
+                                                                this)),
+                                                        t("#btn-back").on("click",
+                                                                function(t) {
+                                                                    t.preventDefault(),
+                                                                            window.location.hash = ""
+                                                                }),
+                                                        c.on("touchmove",
+                                                                function(t) {
+                                                                    t.preventDefault()
+                                                                }),
+                                                        this.createList()
+                                            },
+                                            this.init(),
+                                            this.mainScroll = new e(c[0])
+                                };
+                        t(function() {
+                            new n
+                        })
+                    }
+                }
+            } (window.jQuery || window.Zepto);
+</script>

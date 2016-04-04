@@ -1,0 +1,83 @@
+<!-- 引入header模板 start -->
+<%include("../common/header.html",{'stageArr':["BLOG管理","修改BLOG"]}){}%>
+<!-- 引入header模板 start -->
+
+<script type="text/javascript">
+    function cancel() {
+        if (window.confirm("取消修改？")) {
+            location.href = "${ctxPath}/blog/list";
+        }
+    }
+
+    jQuery.validator.addMethod("isTitle", function(value, element) {
+    	var ereg = /^[a-zA-Z\u4e00-\u9fa5]{1,20}$/;
+    	if (!value.match(ereg)) {
+    		return false;
+    	}
+    	return true;
+    }, "标题必须为1-20位的且只能有汉字、字母、数字的字符");
+
+    jQuery.validator.addMethod("isContent", function(value, element) {
+    	var ereg = /^[a-zA-Z0-9\u4e00-\u9fa5(,.!?;@#$%&)\uFE30-\uFFA0]{0,250}$/;
+    	if (!value.match(ereg)) {
+    		return false;
+    	}
+    	return true;
+    }, "内容应是250位以内不包含,.!?;@#$%&以外英文符号的汉字、字母、数字的字符");
+
+    $(function() {
+        $("#editBlogForm").validate({
+            errorPlacement: function(error, element){
+                var error_td = element.next('em');
+                error_td.find('.field_notice').hide();
+                error_td.append(error);
+            },
+            success: function(label){
+                label.addClass('validate_right').text('OK!');
+            },
+            onkeyup: false,
+            rules: {
+                title:{isTitle:true,required:true},
+                content:{isContent:true,required:true}
+            },
+            messages: {
+                title:{required:"标题不能为空"},
+                content:{required:"内容不能为空"}
+            },
+        });
+    });
+</script>
+
+<form class="am-form" action="${ctxPath}/blog/edit" method="post" id="editBlogForm">
+    <input type="hidden" name="blog.id" value="${blog.id}" />
+    <div class="am-g am-margin-top-sm">
+        <div class="am-u-sm-2 am-text-right">
+            标题<em class="must-em">*</em>
+        </div>
+        <div class="am-u-sm-4 am-u-end">
+            <input type="text" id="title" name="blog.title" class="am-input-sm" value="${blog.title}">
+            <em><label class="field_notice"></label></em>
+        </div>
+    </div>
+    <div class="am-g am-margin-top-sm">
+        <div class="am-u-sm-2 am-text-right">
+            内容<em class="must-em">*</em>
+        </div>
+        <div class="am-u-sm-4 am-u-end">
+            <textarea id="content" name="blog.content" cols="80" rows="10">${blog.content}</textarea>
+            <em><label class="field_notice"></label></em>
+        </div>
+    </div>
+    <div class="am-g am-margin-top-sm submit-div">
+        <button type="submit" class="am-btn am-btn-primary am-btn-sm">
+            <i class="am-icon-edit"></i>&nbsp;&nbsp;修&nbsp;&nbsp;改&nbsp;&nbsp;
+        </button>
+        <button type="reset" class="am-btn am-btn-primary am-btn-sm submit-r" onclick="cancel()">
+            <i class="am-icon-close"></i>&nbsp;&nbsp;取&nbsp;&nbsp;消&nbsp;&nbsp;
+        </button>
+    </div>
+</form>
+
+<!-- 引入bottom start -->
+<%include("../common/bottom.html"){}%>
+<!-- 引入bottom end -->

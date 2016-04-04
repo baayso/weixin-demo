@@ -1,0 +1,68 @@
+<!-- 引入header模板 start -->
+<%include("../common/header.html",{'stageArr':["BLOG管理","BLOG列表"]}){}%>
+<!-- 引入header模板 start -->
+
+<script type="text/javascript">
+
+    function addBlog() {
+        location.href = "${ctxPath}/blog/addUI";
+    }
+
+    function deleteBlog(blogId) {
+        if (window.confirm("是否确认删除？")) {
+            location.href = "${ctxPath}/blog/delete/" + blogId;
+        }
+    }
+
+    function editBlog(blogId) {
+        location.href = "${ctxPath}/blog/editUI/" + blogId;
+    }
+
+    $(function() {
+    	$("#workerListTab").tablesorter({
+    		widgets: ['zebra','columnHighlight','rowHover'],
+    		headers:{2: { sorter: false}}																		
+    	});
+    });
+</script>
+
+<button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="addBlog()">
+    <i class="am-icon-edit"></i>&nbsp;&nbsp;&nbsp;新增
+</button>
+
+<p>
+
+<table id="workerListTab" class="am-table am-table-bordered am-table-striped am-table-hover tablesorter">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>标题</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(blog in blogPage.list){ %>
+        <tr>
+            <!-- <td>${blogLP.index}</td> -->
+            <td>${blog.id}</td>
+            <td>${blog.title}</td>
+            <td>
+                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="editBlog('${blog.id}')">
+                    <i class="am-icon-edit"></i>&nbsp;&nbsp;&nbsp;修改
+                </button>
+                <button type="button" class="am-btn am-btn-primary am-btn-xs" onclick="deleteBlog('${blog.id}')">
+                    <i class="am-icon-trash"></i>&nbsp;&nbsp;&nbsp;删除
+                </button>
+            </td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<!-- 引入分页模板 start -->
+<%include("../common/page.html"){}%>
+<!-- 引入分页模板 end -->
+
+<!-- 引入bottom start -->
+<%include("../common/bottom.html"){}%>
+<!-- 引入bottom end -->

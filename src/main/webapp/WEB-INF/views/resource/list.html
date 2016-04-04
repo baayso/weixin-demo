@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<!--[if lte IE 9]>
+<html class="lte9 no-js m">
+<![endif]-->
+
+<!--[if gt IE 9]><!-->
+<html class="m js cssanimations">
+<!--<![endif]-->
+
+<head>
+    <title>资源列表</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="alternate icon" type="image/png" href="http://s.amazeui.org/assets/2.x/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="http://s.amazeui.org/assets/2.x/i/app-icon72x72@2x.png">
+
+    <link rel="stylesheet" href="http://s.amazeui.org/assets/2.x/css/amazeui.min.css?v=ibj1fy0x">
+    <link rel="stylesheet" href="http://s.amazeui.org/assets/2.x/css/amaze.min.css?v=ibj1fy0x">
+    <link rel="canonical" href="http://amazeui.org?_ver=2.x">
+
+    <script src="http://s.amazeui.org/assets/2.x/js/jquery.min.js?v=ibj1fy0x"></script>
+    <script src="http://s.amazeui.org/assets/2.x/js/handlebars.min.js?v=ibj1fy0x"></script>
+    <script src="http://s.amazeui.org/assets/2.x/js/amazeui.min.js?v=ibj1fy0x"></script>
+</head>
+
+<body>
+
+<div class="am-page" id="mobile-index">
+
+    <header data-am-widget="header" class="am-header am-header-default">
+        <h1 class="am-header-title">资源列表</h1>
+    </header>
+
+    <div id="widget-list">
+        <ul class="am-list m-widget-list"
+            style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; -webkit-transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+            <% for (resource in resourceList) { %>
+            <li>
+                <a href="${ctxPath}/resource/detail?id=${resource.id}" data-rel="accordion">
+                    <img class="widget-icon" src="http://cdn.amazeui.org/src/2.2/widget/accordion/src/accordion.png" alt="Accordion">
+                    <span class="widget-name">${resource.intro}</span>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+
+</div>
+
+<script type="text/x-handlebars-template" id="tpl-demo-list">
+    <ul class="am-list widget-list">
+        {{#each this}}
+        <li>
+            <a href="/{{demoURL}}">{{demoName}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</script>
+
+<!--
+<script src="http://cdn.amazeui.org/fastclick/1.0.6/fastclick.min.js"></script>
+
+<script>!function(t){if(t){t(function(){FastClick.attach(document.body)});var e=t.AMUI.iScroll;if(e){var i="localStorage"in window&&window.localStorage&&window.localStorage,o=["accordion","divider","duoshuo","figure","footer","gallery","gotop","header","intro","list_news","map","mechat","menu","navbar","pagination","paragraph","slider","tabs","titlebar","wechatpay"],n=function(){var n=t("body"),a=t(".widget-hd"),s=t("#demo-scroller"),c=t("#widget-list");this.compile=Handlebars.compile(t("#tpl-demo-list").html()),this.cache={},this.demoScroll=null,this.render=function(t,e){return this.cache[t]||(this.cache[t]=this.compile(e)),this.cache[t]},this.createList=function(e){e=e||this.getHash();var n=this,s="__amui_widget_"+e+"_demos";return e&&a.find("h1").text(c.find("[data-rel="+e+"]").text()+"Demos"),i&&i.getItem(s)?this.setActive(e,JSON.parse(i.getItem(s))):!e||o.indexOf(e)<0?this.resetActive():void t.ajax({type:"GET",url:"/widgets/"+e+"?json=1",dataType:"json",success:function(t){i.setItem(s,JSON.stringify(t)),n.setActive(e,t)},error:function(t,e){alert("Ajax error")}})},this.setActive=function(i,o){s.empty().html(this.render(i,o)),n.addClass("demo-list-active"),this.demoScroll||(this.demoScroll=new e("#demo-list",{tap:!0})),setTimeout(t.proxy(function(){this.demoScroll.refresh()},this),100)},this.resetActive=function(){n.removeClass("demo-list-active")},this.getHash=function(){return window.location.hash.replace("#","")},this.init=function(){c.on("click tap","a",function(e){e.preventDefault(),window.location.hash=t(this).attr("data-rel")}),t(window).on("hashchange",t.proxy(function(){this.createList()},this)),t("#btn-back").on("click",function(t){t.preventDefault(),window.location.hash=""}),c.on("touchmove",function(t){t.preventDefault()}),this.createList()},this.init(),this.mainScroll=new e(c[0])};t(function(){new n})}}}(window.jQuery||window.Zepto);</script>
+-->
+
+</body>
+
+</html>

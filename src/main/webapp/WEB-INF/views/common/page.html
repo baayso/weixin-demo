@@ -1,0 +1,60 @@
+
+<div class="am-container  page-div">
+    <ul data-am-widget="pagination" class="am-pagination am-pagination-default " style="text-align:center;">
+
+        <%
+        var startPageIndex = 0;
+        var endPageIndex = 0;
+
+        // >>> 总页数小于等于10页面的时，全部显示
+        if (blogPage.totalPage <= 10) {
+            startPageIndex = 1;
+            endPageIndex = blogPage.totalPage;
+        }
+        else { // >>> 总页数大于10页时，就只显示当前页附近的共10个页码
+            // 默认显示前4页 + 当前页 + 后5页
+            startPageIndex = blogPage.pageNumber - 4; // 当前第7页，7 - 4 = 3
+            endPageIndex = blogPage.pageNumber + 5; // 当前第7页，7 + 5 = 12 --> 3页 ~ 12页
+
+            // 如果前面不足4个页码时，则显示前10页
+            if (startPageIndex < 1) {
+                startPageIndex = 1;
+                endPageIndex = 10;
+            }
+            else if (endPageIndex > blogPage.totalPage) { // 如果后面不足5个页码时，则显示后10页
+                startPageIndex = blogPage.totalPage - 9;
+                endPageIndex = blogPage.totalPage;
+            }
+        }
+        %>
+
+        <% if(blogPage.pageNumber > 1) { %>
+          <li class="am-pagination-first">
+              <a href="?pageNumber=1">首页</a>
+          </li>
+          <li class="am-pagination-prev">
+              <a href="?pageNumber=${blogPage.pageNumber - 1}">上一页</a>
+          </li>
+        <% } %>
+
+        <% for(var i = startPageIndex; i <= endPageIndex; i++){ %>
+
+          <% if(i == blogPage.pageNumber) { %>
+              <li class="am-active" ><a style="z-index:0">${i}</a></li>
+            <% } else { %>
+              <li><a href="?pageNumber=${i}">${i}</a></li>
+          <% } %>
+
+        <% } %>
+
+        <% if(blogPage.pageNumber < blogPage.totalPage) { %>
+           <li class="am-pagination-next ">
+                <a href="?pageNumber=${blogPage.pageNumber + 1}">下一页</a>
+           </li>
+           <li class="am-pagination-last ">
+                <a href="?pageNumber=${blogPage.totalPage}">末页</a>
+           </li>
+        <% } %>
+
+    </ul>
+</div>

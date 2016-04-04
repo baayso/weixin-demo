@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<!--[if lte IE 9]>
+<html class="lte9 no-js demo">
+<![endif]-->
+
+<!--[if gt IE 9]><!-->
+<html class="demo js cssanimations">
+<!--<![endif]-->
+
+<head>
+    <title>用户信息</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="alternate icon" type="image/png" href="http://s.amazeui.org/assets/2.x/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="http://s.amazeui.org/assets/2.x/i/app-icon72x72@2x.png">
+
+    <link rel="stylesheet" href="http://s.amazeui.org/assets/2.x/css/amazeui.min.css?v=ibj1fy0x">
+    <link rel="stylesheet" href="http://s.amazeui.org/assets/2.x/css/amaze.min.css?v=ibj1fy0x">
+    <link rel="canonical" href="http://amazeui.org?_ver=2.x">
+
+    <script src="http://s.amazeui.org/assets/2.x/js/jquery.min.js?v=ibj1fy0x"></script>
+    <script src="http://s.amazeui.org/assets/2.x/js/handlebars.min.js?v=ibj1fy0x"></script>
+    <script src="http://s.amazeui.org/assets/2.x/js/amazeui.min.js?v=ibj1fy0x"></script>
+
+    <script type="text/javascript">
+
+        function cashout() {
+            // var telephone = $("#telephone").val();
+
+            alert("暂未开放");
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+<div class="page pg-demo">
+
+    <header data-am-widget="header" class="am-header am-header-default">
+        <h1 class="am-header-title">用户信息</h1>
+    </header>
+
+    <!--
+    <nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1" data-am-menu-offcanvas>
+        <a href="javascript: void(0)" class="am-menu-toggle">
+            <i class="am-menu-toggle-icon am-icon-bars"></i>
+        </a>
+
+        <div class="am-offcanvas">
+            <div class="am-offcanvas-bar">
+                <ul class="am-menu-nav am-avg-sm-1">
+                    <li class="">
+                        <a href="##" class="">分享到朋友圈</a>
+                    </li>
+                    <li class="">
+                        <a href="##" class="">发送给朋友</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    -->
+
+    <br/>
+
+    <form class="am-form" name="">
+        <fieldset>
+            <legend></legend>
+
+            <div class="am-form-group">
+                <label for="telephone">手机号码</label>
+                <input type="text" class="" id="telephone" name="telephone" value="${user.telephone}" readonly>
+                <!-- <button type="button" class="am-btn am-btn-default">获取短信验证码</button> -->
+            </div>
+
+            <div class="am-form-group">
+                <label for="profit">收益</label>
+                <input type="text" class="" id="profit" name="profit" value="${user.profit}元" readonly>
+            </div>
+
+            <p>
+                <input type="button" value="提现" onclick="cashout()" class="am-btn am-btn-default">
+            </p>
+        </fieldset>
+    </form>
+
+</div>
+
+</body>
+
+</html>

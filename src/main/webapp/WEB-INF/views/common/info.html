@@ -1,0 +1,45 @@
+<!-- 引入header模板 start -->
+<%include("../common/header.html",{'stageArr':["处理详情"]}){}%>
+<!-- 引入header模板 start -->
+
+<!-- 结果信息显示 start -->
+<div class="am-container am-vertical-align " style="height: 350px;">
+    <div class="am-vertical-align-middle ">
+    <p class="am-text-xl"> 
+    <% if(resultMap["status"] == "true") {  %>
+    <span class="am-success am-icon-smile-o am-icon-lg"></span>
+    <% } else { %>
+    <span class="am-warning am-icon-frown-o am-icon-lg"></span>
+    <% } %>
+    &nbsp;&nbsp;&nbsp; <strong>${resultMap["message"]}</strong>
+    </p>
+    <span id="timeBox">3</span>秒后跳转...    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    <a href="<% if(resultMap["status"] == "true") {  %>${resultMap["jumpUrl"]}<% } else { %>javascript:history.go(-1); <% } %>">
+    
+    立即跳转</a>
+    </div>
+
+</div>
+<!-- 结果信息显示  end -->
+<script type="text/javascript">
+var time = 3; 
+function countDown(){ 
+    time--; 
+document.getElementById("timeBox").innerHTML=time; 
+if (time<1) { 
+    
+    <% if(resultMap["status"] == "true") {  %>
+    location.href="${resultMap["jumpUrl"]}"; 
+    <% } else { %>
+    history.go(-1); 
+    <% } %>
+
+clearInterval(inter); 
+}; 
+} 
+var inter = setInterval("countDown()",1000); 
+</script>
+<!-- 引入bottom start -->
+<%include("../common/bottom.html"){}%>
+<!-- 引入bottom end -->
